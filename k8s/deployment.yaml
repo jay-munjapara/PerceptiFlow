@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perceptiflow-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: perceptiflow
+  template:
+    metadata:
+      labels:
+        app: perceptiflow
+    spec:
+      containers:
+        - name: perceptiflow
+          image: your-dockerhub-username/perceptiflow:latest
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          env:
+            - name: AWS_REGION
+              value: "us-east-1"
